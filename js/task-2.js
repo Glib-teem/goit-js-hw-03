@@ -1,15 +1,21 @@
-function getShippingMessage(country, price, deliveryFee) {
-  // рахуємо товар + доставку
-  const totalPrice = price + deliveryFee;
+function makeArray(firstArray, secondArray, maxLength) {
+  // об'єднаєм массиви в новий масив
+  const newArray = firstArray.concat(secondArray);
 
-  // шаблонне речення (країна + загальна вартість)
-  const message = `Shipping to ${country} will cost ${totalPrice} credits`;
-
-  // повертаємо повідомлення
-  return message;
+  // Перевіряю довжину нового масиву
+  if (newArray.length > maxLength) {
+    // якщо довжина нового масиву більша за maxLength - повертаю обрізану копію
+    return newArray.slice(0, maxLength);
+  } else {
+    // якщо менша - повертаю весь новий масив
+    return newArray;
+  }
 }
 
-// для ментора (проблеми тільки з гітом, локально працює)
-console.log(getShippingMessage('Australia', 120, 50)); // Очікуємо: "Shipping to Australia will cost 170 credits"
-console.log(getShippingMessage('Germany', 80, 20)); // Очікуємо: "Shipping to Germany will cost 100 credits"
-console.log(getShippingMessage('Sweden', 100, 20)); // Очікуємо: "Shipping to Sweden will cost 120 credits"
+// для ментора
+console.log(makeArray(['Mango', 'Poly'], ['Ajax', 'Chelsea'], 3)); // ["Mango", "Poly", "Ajax"]
+console.log(makeArray(['Mango', 'Poly', 'Houston'], ['Ajax', 'Chelsea'], 4)); // ["Mango", "Poly", "Houston", "Ajax"]
+console.log(makeArray(['Mango'], ['Ajax', 'Chelsea', 'Poly', 'Houston'], 3)); // ["Mango", "Ajax", "Chelsea"]
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 2)); // ["Earth", "Jupiter"]
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 4)); // ["Earth", "Jupiter", "Neptune", "Uranus"]
+console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus', 'Venus'], 0)); // []
